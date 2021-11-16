@@ -3,8 +3,8 @@ FROM tomcat:9-jre8
 #
 # Set GeoServer version and data directory
 #
-ARG GEOSERVER_VERSION=2.14
-ARG PATCH_NUMBER=2
+ARG GEOSERVER_VERSION=2.20
+ARG PATCH_NUMBER=0
 ENV GEOSERVER_DATA_DIR="/geoserver_data/data"
 
 #
@@ -27,13 +27,5 @@ RUN mkdir geoserver-backup-plugin && cd geoserver-backup-plugin && \
 
 RUN cp geoserver-backup-plugin/* webapps/geoserver/WEB-INF/lib/ && \
     rm -rf geoserver-backup-plugin
-
-RUN mkdir geogig-plugin  && cd geogig-plugin  && \
-    wget -c https://build.geoserver.org/geoserver/${GEOSERVER_VERSION}.x/community-latest/geoserver-${GEOSERVER_VERSION}-SNAPSHOT-geogig-plugin.zip  && \
-    unzip geoserver-${GEOSERVER_VERSION}-SNAPSHOT-geogig-plugin.zip  && \
-    rm geoserver-${GEOSERVER_VERSION}-SNAPSHOT-geogig-plugin.zip
-
-RUN cp geogig-plugin/* webapps/geoserver/WEB-INF/lib/ && \
-    rm -rf geogig-plugin
 
 ENV JAVA_OPTS="-Djava.awt.headless=true -XX:MaxPermSize=512m -XX:PermSize=256m -Xms512m -Xmx2048m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=4 -Dfile.encoding=UTF8 -Duser.timezone=GMT -Djavax.servlet.request.encoding=UTF-8 -Djavax.servlet.response.encoding=UTF-8 -Duser.timezone=GMT -Dorg.geotools.shapefile.datetime=true"
