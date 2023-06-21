@@ -4,7 +4,7 @@ build:
 	docker build -t $(IMAGENAME) .
 
 clean:
-	docker images | awk -F' ' '{if ($$1=="$(IMAGENAME)") print $$3}' | xargs -r docker rmi
+	docker images | awk -F' ' '{if ($$1=="$(IMAGENAME)") print $$3}' | xargs docker rmi
 
 test:
 	docker run --rm -t -i -p 8080:8080 $(IMAGENAME)

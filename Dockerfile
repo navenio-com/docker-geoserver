@@ -4,7 +4,7 @@ FROM tomcat:9-jre8
 # Set GeoServer version and data directory
 #
 ARG GEOSERVER_VERSION=2.20
-ARG PATCH_NUMBER=0
+ARG PATCH_NUMBER=1
 ENV GEOSERVER_DATA_DIR="/geoserver_data/data"
 
 #
